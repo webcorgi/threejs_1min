@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-// ----- 주제: ex04. 조명(light)
+// ----- 주제: ex05. 애니메이션 requestAnimationFrame()
 // 
 
 
@@ -36,7 +36,7 @@ export default function example() {
 		1000 // far
 	);
 	// camera.position.x = 1;
-	camera.position.x = 2;
+	// camera.position.x = 2;
 	camera.position.y = 2;
 	camera.position.z = 5;
 	scene.add(camera);
@@ -61,7 +61,20 @@ export default function example() {
 	scene.add(mesh);
 
 	// 그리기
-	renderer.render(scene, camera);
+	draw();
+	function draw(){
+		mesh.rotation.y += 0.1;
+		// mesh.rotation.y += THREE.MathUtils.degToRed(10); // deg => 360값, 1 => 1도
+		// mesh.position.y += 0.01;
+		/* if( mesh.position.y > 3 ){
+			mesh.position.y = 0;
+		} */
+
+		renderer.render(scene, camera);
+
+		// window.requestAnimationFrame(draw);
+		renderer.setAnimationLoop(draw);
+	}
 
 
 	// 
