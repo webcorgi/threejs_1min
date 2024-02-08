@@ -1,8 +1,10 @@
 import * as THREE from 'three';
 
-// ----- 주제: ex05. 애니메이션 requestAnimationFrame()
-// 
+// ----- 주제: ex05. 애니메이션 requestAnimationFrame(), setAnimationLoop()
+// setAnimationLoop은 VR쓸때 씀
 
+// const clock = new THREE.clock() // 경과된 시간을 갖고 있다.
+// const time = clock.getElapsedTime()
 
 export default function example() {
 
@@ -60,24 +62,30 @@ export default function example() {
 	const mesh = new THREE.Mesh(geometry, material);
 	scene.add(mesh);
 
-	// 그리기
-	draw();
+
+	const clock = new THREE.clock() // 경과된 시간을 갖고 있다.
 	function draw(){
-		mesh.rotation.y += 0.1;
-		// mesh.rotation.y += THREE.MathUtils.degToRed(10); // deg => 360값, 1 => 1도
-		// mesh.position.y += 0.01;
-		/* if( mesh.position.y > 3 ){
+		// console.log(clock.getElapsedTime())
+		const time = clock.getElapsedTime()
+
+		// 각도는 Radian을 사용
+		// 360도는 2파이
+		// mesh.rotation.y += 0.1;
+		// mesh.rotation.y += THREE.MathUtils.degToRad(1);
+		mesh.rotation.y = 2 * time;
+		mesh.position.y += 0.01;
+		if (mesh.position.y > 3) {
 			mesh.position.y = 0;
-		} */
+		}
 
 		renderer.render(scene, camera);
 
 		// window.requestAnimationFrame(draw);
 		renderer.setAnimationLoop(draw);
-	}
+	}draw();
 
 
-	// 
+	//
 	function setSize(){
 		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
