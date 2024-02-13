@@ -1,7 +1,6 @@
 import * as THREE from 'three';
-import gsap from 'gsap'
 
-// ----- 주제: 라이브러리를 이용한 애니메이션
+// ----- 주제: AxesHelper, GridHelper
 
 export default function example() {
 	// Renderer
@@ -15,7 +14,6 @@ export default function example() {
 
 	// Scene
 	const scene = new THREE.Scene();
-	scene.fog = new THREE.Fog('black', 3, 7);
 
 	// Camera
 	const camera = new THREE.PerspectiveCamera(
@@ -24,50 +22,33 @@ export default function example() {
 		0.1,
 		1000
 	);
-	camera.position.y = 1;
 	camera.position.z = 5;
 	scene.add(camera);
 
 	const light = new THREE.DirectionalLight(0xffffff, 1);
 	light.position.x = 1;
-	light.position.y = 3;
-	light.position.z = 5;
+	light.position.z = 2;
 	scene.add(light);
 
 	// Mesh
 	const geometry = new THREE.BoxGeometry(1, 1, 1);
 	const material = new THREE.MeshStandardMaterial({
-		color: 'red'
+		color: 'seagreen'
 	});
-
-	const meshes = [];
-	let mesh = new THREE.Mesh(geometry, material);
-	sence.add(mesh)
+	const mesh = new THREE.Mesh(geometry, material);
+	scene.add(mesh);
 
 	// 그리기
-	let time = Date.now();
+	const clock = new THREE.Clock();
 
 	function draw() {
-		const newTime = Date.now();
-		const deltaTime = newTime - time;
-		time = newTime;
+		const time = clock.getElapsedTime();
 
-		/* meshes.forEach(item => {
-			item.rotation.y += deltaTime * 0.001;
-		}); */
+		mesh.rotation.y = time;
 
 		renderer.render(scene, camera);
-
-		// window.requestAnimationFrame(draw);
 		renderer.setAnimationLoop(draw);
 	}
-
-	gsap.to(
-		mesh.position,
-		{
-
-		}
-	)
 
 	function setSize() {
 		camera.aspect = window.innerWidth / window.innerHeight;

@@ -54,7 +54,7 @@ export default function example() {
 		renderer.render(scene, camera);
 
 		// window.requestAnimationFrame(draw);
-		renderer.setAnimationLoop(draw);
+		// renderer.setAnimationLoop(draw);
 	}
 
 	// gsap

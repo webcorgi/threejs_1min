@@ -1,3 +1,3 @@
 # threejs 강의 (공부중인 소스)
 
-현재 직교카메라까지 학습
+https://threejs.org/docs/index.html#manual/ko/introduction/Creating-a-scene
